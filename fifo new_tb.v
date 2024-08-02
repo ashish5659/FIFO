@@ -45,10 +45,8 @@ module tb_fifo;
         // Write to FIFO till it gets full
         for (i = 0; i < DEPTH; i = i + 1) begin
             @(posedge clk);
-            begin
-                data_in = $random;  // writing random data
-                wr_en = 1;
-            end            
+            data_in = $random;  // writing random data
+            wr_en = 1;
         end
         
         @(posedge clk);    
@@ -56,10 +54,8 @@ module tb_fifo;
         
         // Attempt to write when FIFO is full
         @(posedge clk);
-        begin
-            data_in = $random;
-            wr_en = 1;
-        end
+        data_in = $random;
+        wr_en = 1;
         
         @(posedge clk);       
         wr_en = 0;
@@ -76,10 +72,8 @@ module tb_fifo;
         // Attempt to write again after some reading to check full and empty conditions  
         for (i = 0; i < 4; i = i + 1) begin
             @(posedge clk);
-            begin
-                data_in = $random;  
-                wr_en = 1;
-            end
+            data_in = $random;  
+            wr_en = 1;
         end    
             
         @(posedge clk);
@@ -111,4 +105,10 @@ module tb_fifo;
         #30;
         $finish;
     end
+    
+    initial begin
+        $dumpfile("dump.vcd");
+        $dumpvars(0, tb_fifo);
+    end
+
 endmodule
